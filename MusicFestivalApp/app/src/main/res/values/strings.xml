@@ -15,4 +15,6 @@
     </string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_item">ItemActivity</string>
+    <string name="title_activity_database_acttivity">DatabaseActtivity</string>
+    <string name="title_activity_database">DatabaseActivity</string>
 </resources>

@@ -343,7 +343,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 finish();
 
                 // create new activity
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                Intent i = new Intent(LoginActivity.this, DatabaseActivity.class);
                 startActivity(i);
 
                 // send mail

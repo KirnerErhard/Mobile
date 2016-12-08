@@ -32,6 +32,10 @@
         <activity
             android:name=".ItemActivity"
             android:label="@string/title_activity_item"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DatabaseActivity"
+            android:label="@string/title_activity_database"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
