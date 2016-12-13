@@ -8,8 +8,12 @@
   },
   "dependencies": {
     "react": "15.3.2",
+    "react-encoded-mailto": "0.0.6",
     "react-mailto": "^0.4.0",
-    "react-native": "0.36.1"
+    "react-native": "0.36.1",
+    "react-native-chart": "^1.0.8-beta",
+    "react-native-pie-chart": "^1.0.4",
+    "realm": "^0.15.0"
   },
   "jest": {
     "preset": "jest-react-native"

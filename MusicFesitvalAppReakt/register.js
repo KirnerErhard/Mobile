@@ -23,6 +23,7 @@ export default class Register extends Component{
             name: routeName
         })
     }
+    
 
   render() {
     return (
