@@ -47,4 +47,11 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/databaseActivity"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:text="Artists"
+        android:onClick="onClick"/>
+
 </android.support.design.widget.CoordinatorLayout>

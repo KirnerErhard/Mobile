@@ -56,12 +56,12 @@ public class ArtistDataSource {
         return artist;
     }
 
-    public void deleteArtist(Artist artist){
-        long id = artist.getId();
-        database.delete(MySqlHelper.TABLE_ARTISTS, MySqlHelper.COLUMN_ID + " = " + id,
-                null);
-
-    }
+//    public void deleteArtist(Artist artist){
+//        long id = artist.getId();
+//        database.delete(MySqlHelper.TABLE_ARTISTS, MySqlHelper.COLUMN_ID + " = " + id,
+//                null);
+//
+//    }
 
     public List<Artist> getAlArtists(){
         List<Artist> artists = new ArrayList<Artist>();
@@ -81,7 +81,7 @@ public class ArtistDataSource {
 
     private Artist cursorToArtist(Cursor cursor) {
         Artist artist = new Artist();
-        artist.setId(cursor.getLong(0));
+//        artist.setId(cursor.getLong(0));
         artist.setName(cursor.getString(1));
         artist.setTime(cursor.getString(2));
         artist.setDetails(cursor.getString(3));

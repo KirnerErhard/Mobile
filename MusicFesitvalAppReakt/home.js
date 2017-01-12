@@ -21,26 +21,50 @@ import {
 import realm from './Model/model';
 import PieChart from 'react-native-pie-chart';
 
+import * as firebase from 'firebase';
+
+import FCM from 'react-native-fcm';
+
 export default class Home extends Component{
 
   constructor(props){
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2});
-    var artists = realm.objects('Artist');
 
-    this.state ={
-      dataSource:ds.cloneWithRows(artists)//['Kings of Leon', 'Queen', 'Scorpions', 'Dub FX', 'The xx'])
-    };
+    this.itemsRef = firebase.database().ref('Artist');
+
+    this.state = {
+      dataSource:new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      name:'',
+      time:'',
+      details:''
+    }
+  }
+
+  componentDidMount(){
+    this.listenForItems(this.itemsRef);
+  
+  }
+
+  listenForItems(itemsRef){
+    itemsRef.on('value', (snap) =>{
+      var items = [];
+      snap.forEach((child)=>{
+        items.push({
+            name:child.val().name,
+            time:child.val().time,
+            details:child.val().time,
+            _key: child.key
+        });
+      });
+
+      this.setState({
+        dataSource:this.state.dataSource.cloneWithRows(items)
+      });
+    });
   }
 
   handleClick(){
-    realm.write(()=>{
-      realm.create('Artist', {
-        name:this.state.name1, 
-        time:this.state.time,
-        details:this.state.details
-      })
-    });
+   this.itemsRef.push({ name:this.state.name, time:this.state.time, details: this.state.details});
   }
 
   navigate(routeName){
@@ -56,21 +80,14 @@ export default class Home extends Component{
 
 
           <Text>Name:</Text>
-         <TextInput onChangeText={(name1) => this.setState({name1})} style={styles.input}/>
+         <TextInput onChangeText={(text) => this.setState({name:text})} style={styles.input}/>
          <Text>Time:</Text>
-         <TextInput onChangeText={(time) => this.setState({time})}  style={styles.input}/>
+         <TextInput onChangeText={(text) => this.setState({time:text})}  style={styles.input}/>
          <Text>Details:</Text>
-         <TextInput onChangeText={(details) => this.setState({details})} style={styles.input}/>
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text>{realm.objects('Artist').length}</Text>
-            <TouchableHighlight onPress = {this.handleClick.bind(this)}>
-                    <Text>Add</Text>
-            </TouchableHighlight>
-          </View>
-          
-
+         <TextInput onChangeText={(text) => this.setState({details:text})} style={styles.input}/>
+       
         <ListView
-          dataSource = {this.state.dataSource}
+          dataSource={this.state.dataSource}
           renderRow = { (rowData)=>
             <View>
               <Text style={styles.text}
@@ -80,9 +97,7 @@ export default class Home extends Component{
                   [
                     {text:'Details', onPress: () => this.navigate('detail') },
                     {text:'Cancel'},
-                    {text:'Ok', onPress: () => realm.write(()=> {
-                      realm.delete(realm.objects('Artist').find((artist) => rowData.name == artist.name))}
-                      )},
+                    {text:'Ok', onPress:()=> this.itemsRef.child(rowData._key).remove()}
                   ]
                 )} >
                 {rowData.name}
@@ -91,6 +106,13 @@ export default class Home extends Component{
             </View>
            } 
         />
+
+         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <TouchableHighlight onPress = {this.handleClick.bind(this)}>
+                    <Text>Add</Text>
+            </TouchableHighlight>
+          </View>
+
         </View>
     );}
 }

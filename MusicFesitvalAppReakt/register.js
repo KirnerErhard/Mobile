@@ -17,13 +17,42 @@ import {
   Navigator
 } from 'react-native';
 
+import * as firebase from 'firebase';
+
+var config = {
+    apiKey: "AIzaSyCXRzUiXY1Iu_OBt1vPlNR00V7vMUhjXBU",
+    authDomain: "musicfestivalapp-6357d.firebaseapp.com",
+    databaseURL: "https://musicfestivalapp-6357d.firebaseio.com",
+    storageBucket: "musicfestivalapp-6357d.appspot.com",
+    messagingSenderId: "1063257010458"
+  };
+  firebase.initializeApp(config);
+
 export default class Register extends Component{
+    constructor(props){
+      super(props);
+      this.state = {
+        loaded:true,
+        email:'',
+        password:''                                                                                          
+      };
+    }
+
     navigate(routeName){
         this.props.navigator.push({
             name: routeName
         })
     }
-    
+
+    handleRegisterClick(){
+      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
+      this.navigate('home');
+    }
+
+     handleSignInClick(){
+	  	firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
+      this.navigate('home');
+     }
 
   render() {
     return (
@@ -31,32 +60,29 @@ export default class Register extends Component{
         <Text style={styles.welcome}>
           Welcome to Music Festival!
         </Text>
-
         <TextInput
                  style={{height: 40, width: 180,color:"#FF5722"}}
                  placeholder="Email"
-                 onChangeText={(text) => this.setState({text})}/>
-        <TextInput
-            style={{height: 40, width: 180,color:"#FF5722"}}
-            placeholder="User name"
-            onChangeText={(text) => this.setState({text})}/>
+                 onChangeText={(text) => this.setState({email:text})}/>
+                 
         <TextInput
                  style={{height: 40, width: 180,color:"#FF5722"}}
                  placeholder="Password"
                  secureTextEntry = {true}
-                 onChangeText={(text) => this.setState({text})}/>
-        <TextInput
-                style={{height: 40, width: 180, color:"#FF5722"}}
-                placeholder="Renter password"
-                secureTextEntry = {true}
-                onChangeText={(text) => this.setState({text})}/>
-
+                 onChangeText={(text) => this.setState({password:text})}/>
+       
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <TouchableHighlight onPress={this.navigate.bind(this, 'home')} style = {styles.button}>
-                  <Text>Submit</Text>
+          <TouchableHighlight onPress={this.handleSignInClick.bind(this)} style = {styles.button}>
+                  <Text>Sign in</Text>
           </TouchableHighlight>
+
+          <TouchableHighlight onPress={this.handleRegisterClick.bind(this)} style = {styles.button}>
+                  <Text>Register</Text>
+          </TouchableHighlight>
+
         </View>
 
+          
       </View>
     );
   }

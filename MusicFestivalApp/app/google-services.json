@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1063257010458",
+    "firebase_url": "https://musicfestivalapp-6357d.firebaseio.com",
+    "project_id": "musicfestivalapp-6357d",
+    "storage_bucket": "musicfestivalapp-6357d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063257010458:android:8a900471e74c2920",
+        "android_client_info": {
+          "package_name": "com.example.rudy.musicfestivalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063257010458-t35k89mb842vfieee6uhof3a3d09mdh1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rudy.musicfestivalapp",
+            "certificate_hash": "65CEDF78B00A5117E30A87D9BF541BC562B93183"
+          }
+        },
+        {
+          "client_id": "1063257010458-o3ceh74lp0es9bti3m34m8n026mar0tc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr6IiXroBlh_akjB3IrnJm0MUgB01x4BA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063257010458-o3ceh74lp0es9bti3m34m8n026mar0tc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

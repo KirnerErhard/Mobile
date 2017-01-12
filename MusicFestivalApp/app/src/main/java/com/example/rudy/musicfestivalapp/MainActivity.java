@@ -45,6 +45,15 @@ public class MainActivity extends Activity {
                 startActivityForResult(intent, 1);
             }
         });
+
+
+    }
+
+    public void onClick(View view){
+        if(R.id.databaseActivity == view.getId()){
+            Intent i = new Intent(MainActivity.this, DatabaseActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override
